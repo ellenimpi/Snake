@@ -4,25 +4,44 @@
     <title>Snake Game</title>
   </head>
   <body>
+    <div id="score">0</div>
     <canvas id="gameCanvas" width="300" height="300"></canvas>
 
     <script>
-      /** CONSTANTS **/
+      //constant variables
       const CANVAS_BORDER_COLOUR = "black";
       const CANVAS_BACKGROUND_COLOUR = "white";
+      const SNAKE_BODY = "lightgreen";
+      const SNAKE_LINES = "darkgreen";
+      //array representing the snake
+      let snake = [
+        { x: 150, y: 150 },
+        { x: 140, y: 150 },
+        { x: 130, y: 150 },
+        { x: 120, y: 150 },
+        { x: 110, y: 150 }
+      ];
 
-      // Get the canvas element
+      //draws and fills game canvas
       var gameCanvas = document.getElementById("gameCanvas");
-      // Return a two dimensional drawing context
       var ctx = gameCanvas.getContext("2d");
-      //  Select the colour to fill the canvas
       ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-      //  Select the colour for the border of the canvas
       ctx.strokestyle = CANVAS_BORDER_COLOUR;
-      // Draw a "filled" rectangle to cover the entire canvas
       ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-      // Draw a "border" around the entire canvas
       ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+      drawSnake();
+
+      function drawSnake() {
+        snake.forEach(drawSnakeSquare);
+      }
+
+      function drawSnakeSquare(snakeSquare) {
+        ctx.fillStyle = SNAKE_BODY;
+        ctx.strokestyle = SNAKE_LINES;
+        ctx.fillRect(snakeSquare.x, snakeSquare.y, 10, 10);
+        ctx.strokeRect(snakeSquare.x, snakeSquare.y, 10, 10);
+      }
     </script>
   </body>
 </html>
